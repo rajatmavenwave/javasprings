@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+<beans>
+   
+      
+   <!-- (6)initializing collections list and here we r defining a list and adding references to the list and referring it to the 'points' object type of list and getting values in list in triangle class   --> 
+   <!--
+   <bean id="triangle" class="org.rj1.java.Triangle1" name="triangle-name" >
+   <property name="points" >
+         <list>
+            <ref bean="zeroPoint" />
+            <ref bean="point2" />
+            <ref bean="point3" />
+         </list>
+      </property> 
+      </bean> -->  
+
+<!-- (6-b)part of list -->
+<!--<bean id="zeroPoint" class ="org.rj1.java.Point1">
+      <property name="x" value="0"></property>
+      <property name="y" value="0"></property>
+   </bean>
+   
+   <bean id="point2" class ="org.rj1.java.Point1">
+       <property name="x" value="-20"></property>
+       <property name="y" value="0"></property>
+   </bean>
+   
+   <bean id="point3" class ="org.rj1.java.Point1">
+        <property name="x" value="20"></property>
+        <property name="y" value="0"></property>
+   </bean>-->
+   
+   
+<!-- (7)auto wiring helps to reduce the configuration that we have to by intelligently and we have to mention the dependency with 3 differ property tag and always use the auto wire tag to implement it. and can be done only by manually --> 
+<!-- we r defining the autowire tag with value byName so it will check the member variable and refers this beans to member variable with the same id name -->
+ <!-- <bean id="triangle" class="org.rj1.java.Triangle1" autowire="byName">
+   
+    </bean>-->
+<!-- there is an another method to use autowire that can be use by ByType and only use if there is one member variable and one bean in the xml, so it will check for the type of that bean and do the wiring -->
+<!--     <bean id="triangle" class="org.rj1.java.Triangle1" autowire="byType">-->
+<!-- there is an another method of auto wire that can be done by constructor, constructor injections can be done by the constructor having values/arguments of different types, setting the single bean for each type of those here -->  
+ 
+<!--     <bean id="triangle" class="org.rj1.java.Triangle1" autowire="constructor"> -->
+
+
+<!-- (7-b)we can have same name as member variables -->
+<!-- <bean id="pointA" class ="org.rj1.java.Point1">
+      <property name="x" value="0"></property>
+      <property name="y" value="0"></property>
+   </bean>
+   
+   <bean id="pointB" class ="org.rj1.java.Point1">
+       <property name="x" value="-20"></property>
+       <property name="y" value="0"></property>
+   </bean>
+   
+   <bean id="pointC" class ="org.rj1.java.Point1">
+        <property name="x" value="20"></property>
+        <property name="y" value="0"></property>
+   </bean>-->
+  
+  
+<!-- (9)Bean definition Inheritance and also it can be implement in the list collections by referring it to the list and also you can merge the list we have aoption for it that can be done by adding merge property in list tag like : merge="true" in the list tag so it ll add the element to the parent class applicable only if it is the same collection -->  
+<!-- (9-b)there is another property if you dont wan to initialize the parent then you can add abstract to that tag like: abstract="true" so it ll not create bean of the parent bean and use the parent as a template and child will use the parent definition to inherit their configuration-->
+    <bean id="parenttriangle" class="org.rj1.java.Triangle1" abstract="true">
+      <property name="pointA" ref="pointA"></property>      
+   </bean>  
+ 
+ <!-- this bean has a definition that it has parent that is parenttriangle and inherits the defination from parent triangle and all the configuration of parent triangle will apply to this triangle1 -->  
+   <bean id="triangle1" class="org.rj1.java.Triangle1" parent="parenttriangle">
+      <property name="pointB" ref="pointB"></property>
+      <property name="pointC" ref="pointC"></property>
+   </bean> 
+   
+   <bean id="triangle2" class="org.rj1.java.Triangle1" parent="parenttriangle">
+      <property name="pointB" ref="pointB"></property>     
+   </bean> 
+   
+    <bean id="pointA" class ="org.rj1.java.Point1">
+      <property name="x" value="0"></property>
+      <property name="y" value="0"></property>
+   </bean>
+   
+   <bean id="pointB" class ="org.rj1.java.Point1">
+       <property name="x" value="-20"></property>
+       <property name="y" value="0"></property>
+   </bean>
+   
+   <bean id="pointC" class ="org.rj1.java.Point1">
+        <property name="x" value="20"></property>
+        <property name="y" value="0"></property>
+   </bean>
+   
+</beans> 
+   
+   

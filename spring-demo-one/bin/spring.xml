@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+<beans>
+   <bean id="triangle" class="org.rj.java.Triangle" >
+   <!--(5-b)alias name referring to the bean where id is referring to the class <bean id="triangle" class="org.rj.java.Triangle" name="triangle-name" > --> 
+   
+     
+      <!-- (1)setter injection -->
+      <!--  <property name="type" value="Equilateral"></property> --> 
+      
+      
+      <!-- (2)constructor injection -->
+      <!-- <constructor-arg index="0" value="Equilateral"></constructor-arg>
+      <constructor-arg index="1" value="20"></constructor-arg> -->
+      
+      
+      <!-- (3-a)Injecting objects as points of triangle and making beans of it and giving references to the main bean  -->
+      <!-- <property name="pointA" ref="zeroPoint"></property> 
+      <property name="pointB" ref="point2"></property> 
+      <property name="pointC" ref="point3"></property> -->
+      
+    
+      <!-- (4-a) inner Beans and also not need to give id because it is used for referring  -->
+      <property name="pointA" ref="zeroPoint">
+           <!--(5-c) adding id ref for validation <idref="zeroPoint" /> -->
+      </property>
+      <property name="pointB">
+         <bean  class ="org.rj.java.Point">
+             <property name="x" value="-20"></property>
+             <property name="y" value="0"></property>
+         </bean>
+      </property>
+      <property name="pointC">
+          <bean id="point3" class ="org.rj.java.Point">
+              <property name="x" value="20"></property>
+              <property name="y" value="0"></property>
+          </bean>
+      </property>    
+   </bean>
+   
+   
+   <!-- (3-b)part of (3-a) -->
+   <!-- <bean id="zeroPoint" class ="org.rj.java.Point">
+      <property name="x" value="0"></property>
+      <property name="y" value="0"></property>
+   </bean>
+   <bean id="point2" class ="org.rj.java.Point">
+      <property name="x" value="-20"></property>
+      <property name="y" value="0"></property>
+   </bean>
+   <bean id="point3" class ="org.rj.java.Point">
+      <property name="x" value="20"></property>
+      <property name="y" value="0"></property>
+   </bean> -->
+   
+   
+   <!-- (4-b) part of (4-a) -->  
+   <bean id="zeroPoint" class ="org.rj.java.Point">
+      <property name="x" value="0"></property>
+      <property name="y" value="0"></property>
+   </bean>
+   
+   <!-- (5) multiple alias name can be created for referring it  and also you can refer the name alias to the triangle in part (1)-->
+   <alias name="triangle" alias="triangle-alias"/>
+   
+</beans> 
+   
+   
